@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mood & Music Matcher 🎶</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      transition: background 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff4da6;
+      margin-bottom: 30px;
+    }
+
+    .mood-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1em;
+      border: 2px solid #ff4da6;
+      border-radius: 25px;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff4da6;
+      color: #121212;
+    }
+
+    .result {
+      opacity: 0;
+      transition: opacity 1s ease;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .result.visible {
+      opacity: 1;
+    }
+
+    .song-title {
+      font-size: 1.5em;
+      color: #ffd369;
+      margin: 15px 0 5px;
+    }
+
+    .artist {
+      font-style: italic;
+      color: #aaa;
+    }
+
+    iframe {
+      margin-top: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 420px;
+      height: 240px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎧 Mood & Music Matcher</h1>
+
+  <div class="mood-buttons">
+    <button onclick="playSong('happy')">😊 Happy</button>
+    <button onclick="playSong('sad')">😢 Sad</button>
+    <button onclick="playSong('romantic')">❤️ Romantic</button>
+    <button onclick="playSong('energetic')">💃 Energetic</button>
+    <button onclick="playSong('calm')">🌙 Calm</button>
+    <button onclick="playSong('rainy')">🌧️ Rainy</button>
+    <button onclick="playSong('study')">📚 Study Vibes</button>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const songs = {
+      happy: {
+        title: "Vaathi Coming – Master",
+        artist: "Anirudh Ravichander",
+        youtubeId: "np3XqP3al2Q",
+        bg: "#ff9ff3"
+      },
+      sad: {
+        title: "Kanne Kalaimane – Moondram Pirai",
+        artist: "Ilaiyaraaja, KJ Yesudas",
+        youtubeId: "voGdAsN-vtg",
+        bg: "#576574"
+      },
+      romantic: {
+        title: "Enna Solla Pogirai – Kandukondain Kandukondain",
+        artist: "Shankar Mahadevan, AR Rahman",
+        youtubeId: "R9QHqeCjR4k",
+        bg: "#f368e0"
+      },
+      energetic: {
+        title: "Aalaporan Thamizhan – Mersal",
+        artist: "AR Rahman, Kailash Kher",
+        youtubeId: "q2PXyyhZQHs",
+        bg: "#ff6b6b"
+      },
+      calm: {
+        title: "Uyire – Bombay",
+        artist: "Hariharan, KS Chithra",
+        youtubeId: "hGS3wMT8YTU",
+        bg: "#1dd1a1"
+      },
+      rainy: {
+        title: "Nenjukkul Peidhidum – Vaaranam Aayiram",
+        artist: "Hariharan, Harris Jayaraj",
+        youtubeId: "hTjv8f4glbw",
+        bg: "#54a0ff"
+      },
+      study: {
+        title: "Snehithane – Alaipayuthey (Instrumental Lo-Fi)",
+        artist: "Lo-Fi Tamil Mix",
+        youtubeId: "Yj6a4_TntjA",
+        bg: "#c8d6e5"
+      }
+    };
+
+    function playSong(mood) {
+      const song = songs[mood];
+      const result = document.getElementById('result');
+
+      document.body.style.backgroundColor = song.bg;
+
+      result.classList.remove('visible');
+      setTimeout(() => {
+        result.innerHTML = `
+          <div class="song-title">${song.title}</div>
+          <div class="artist">${song.artist}</div>
+          <iframe src="https://www.youtube.com/embed/${song.youtubeId}?autoplay=1" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        `;
+        result.classList.add('visible');
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
